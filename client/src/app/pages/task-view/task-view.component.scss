@@ -12,7 +12,6 @@
 .sidebar{
     display: flex;
     flex-direction: column;
-
     width: 250px;
     background: #fff;
     padding: 25px;
@@ -29,6 +28,15 @@
     padding: 42px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
+  
+    .top-bar{
+        margin-bottom: 20px;
+        display: flex;
+        .title{
+            flex-grow: 1;
+            margin: 0;
+        }
+    }
 }
 
 .title{
@@ -66,10 +74,14 @@
 
 
 .task{
+    display: flex;
     background: white;
     padding: 15px 20px;
     border-radius: 5px;
     margin-top: 10px;
+
+    align-items: center;
+
     &:not(.complete){
         transition: box-shadow 0.2 ease-in, transform 0.3;
         cursor: pointer;
@@ -80,11 +92,26 @@
         
             &:hover{
                 box-shadow: 0 0 0 5px #eee;
+                .task-buttons{
+                    opacity: 1;
+                    transform: scale(1);
+                }
             }
     }
 
-    &.complete{
+    &.complete .task-text{
         text-decoration: line-through;
+    }
+
+    .task-text{
+        display: flex;
+        flex-grow: 1;
+    }
+
+    .task-buttons{
+        opacity: 0;
+        transition: opacity 0.8s,transform 0.8s;
+        transform: scale(0.5);
     }
 
 }
@@ -106,9 +133,11 @@
     margin-bottom: 12px;
 }
 
-
-
-
+.empty-state-text{
+    font-size: 20px;
+    color: #777;
+    text-align: center;
+}
 
 
 

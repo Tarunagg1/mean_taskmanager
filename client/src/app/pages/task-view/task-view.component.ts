@@ -10,25 +10,27 @@ import { TaskService } from 'src/app/service/task.service';
   styleUrls: ['./task-view.component.scss'],
 })
 export class TaskViewComponent implements OnInit {
-
-  lists:List[];
-  tasks:Task;
-  listid:string;
-  
+  lists: List[];
+  tasks: Task;
+  listid: string;
+  selectedListId: string;
 
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute,
-    private router:Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.listid = params.listid;
-      if(this.listid){
-        this.taskService.getTaskByListId(this.listid).subscribe((task:Task)=>{
-          this.tasks = task;
-        })
+      if (this.listid) {
+        this.selectedListId = params.listid;
+        this.taskService
+          .getTaskByListId(this.listid)
+          .subscribe((task: Task) => {
+            this.tasks = task;
+          });
       }
     });
 
@@ -37,11 +39,36 @@ export class TaskViewComponent implements OnInit {
     });
   }
 
-  onTaskClick(task:Task) {
-    this.taskService.complete(task)
-    .subscribe((response: Task) => {
+  onTaskClick(task: Task) {
+    this.taskService.complete(task).subscribe((response: Task) => {
       task.iscompleted = !task.iscompleted;
-    })
+    });
   }
 
+  onDeleteListClick() {
+    if (this.listid) {
+      this.taskService.deleteList(this.selectedListId).subscribe((res: any) => {
+        this.router.navigate(['/list']);
+      });
+    } else {
+      alert('Select list id');
+    }
+  }
+
+  onTaskListClick() {
+    if (this.listid) {
+      this.router.navigate(['/editlist', this.listid]);
+    } else {
+      alert('Select list id');
+    }
+  }
+
+  deleteTask(taskid: string) {
+    console.log(taskid);
+    this.taskService
+      .deletetask(this.selectedListId, taskid)
+      .subscribe((resp: any) => {
+        this.router.navigate(['/list', taskid]);
+      });
+  }
 }

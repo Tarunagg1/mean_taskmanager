@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EditListComponent } from './pages/edit-list/edit-list.component';
+import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NewListComponent } from './pages/new-list/new-list.component';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
@@ -29,6 +31,11 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'edittask/:taskid',
+    component: EditTaskComponent,
+    pathMatch: 'full',
+  },
+  {
     path: 'list',
     component: TaskViewComponent,
     pathMatch: 'full',
@@ -42,7 +49,12 @@ const routes: Routes = [
     path: 'login',
     component: LoginPageComponent,
     pathMatch: 'full',
-  }
+  },
+  {
+    path: 'list/:listid/edittask/:taskid',
+    component: EditTaskComponent,
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

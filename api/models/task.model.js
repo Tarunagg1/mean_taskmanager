@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const list = require('./list.model');
 
 
 const taskSchema = mongoose.Schema({
@@ -10,6 +11,7 @@ const taskSchema = mongoose.Schema({
     },
     listid:{
         type:mongoose.Types.ObjectId,
+        ref:'list',
         required:true
     },
     iscompleted:{
@@ -18,8 +20,12 @@ const taskSchema = mongoose.Schema({
     }
 });
 
+// user.find({$and:[{id:id}]})
+
+
 const task = mongoose.model('task',taskSchema);
 
 module.exports = task;
+
 
 

@@ -28,4 +28,14 @@ export class WebrequestService {
   delete(uri:string){
     return this.http.delete(`${this.BASE_URL}/${uri}`);
   }
+
+  login(email:string,password:string){
+    return this.http.post(`${this.BASE_URL}/login`,{email,password},{observe:'response'});    
+  }
+
+  register(email:string,password:string){
+    return this.http.post(`${this.BASE_URL}/register`,{email,password},{observe:'response'});    
+  }
+
+
 }

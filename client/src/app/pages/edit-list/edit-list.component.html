@@ -1,1 +1,27 @@
-<p>edit-list works!</p>
+<div class="centered-content">
+    <div class="modal-box">
+      <div class="title">
+        <h1>Update list</h1>
+      </div>
+      <input
+        class="input has-background-light is-medium"
+        #listTitleinput
+        type="text"
+        placeholder="Enter Title"
+      />
+      <div class="buttons is-right">
+          <button routerLink="/" class="button is-medium" style="margin-top: 20px">
+            cancel
+          </button>
+          
+        <button
+          class="button is-primary is-medium"
+          style="margin-top: 20px"
+          (click)="editList(listTitleinput.value)"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+  
